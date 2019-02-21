@@ -2,19 +2,19 @@
   <div class="login-container">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
       <h3 class="title">vue-admin-template</h3>
-      <el-form-item prop="username">
+      <el-form-item prop="NickName">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
-        <el-input v-model="loginForm.username" name="username" type="text" auto-complete="on" placeholder="username" />
+        <el-input v-model="loginForm.NickName" name="username" type="text" auto-complete="on" placeholder="username" />
       </el-form-item>
-      <el-form-item prop="password">
+      <el-form-item prop="Password">
         <span class="svg-container">
           <svg-icon icon-class="password" />
         </span>
         <el-input
           :type="pwdType"
-          v-model="loginForm.password"
+          v-model="loginForm.Password"
           name="password"
           auto-complete="on"
           placeholder="password"
@@ -29,41 +29,27 @@
         </el-button>
       </el-form-item>
       <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: admin</span>
+        <span style="margin-right:20px;">username: xcl</span>
+        <span> password: 888888</span>
       </div>
     </el-form>
   </div>
 </template>
 
 <script>
-import { isvalidUsername } from '@/utils/validate'
+import { validateUsername, validatePass } from '@/utils/formRules'
 
 export default {
   name: 'Login',
   data() {
-    const validateUsername = (rule, value, callback) => {
-      if (!isvalidUsername(value)) {
-        callback(new Error('请输入正确的用户名'))
-      } else {
-        callback()
-      }
-    }
-    const validatePass = (rule, value, callback) => {
-      if (value.length < 5) {
-        callback(new Error('密码不能小于5位'))
-      } else {
-        callback()
-      }
-    }
     return {
       loginForm: {
-        username: 'admin',
-        password: 'admin'
+        NickName: 'xcl',
+        Password: '888888'
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePass }]
+        NickName: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        Password: [{ required: true, trigger: 'blur', validator: validatePass }]
       },
       loading: false,
       pwdType: 'password',
@@ -101,7 +87,7 @@ export default {
           return false
         }
       })
-    }
+    },
   }
 }
 </script>

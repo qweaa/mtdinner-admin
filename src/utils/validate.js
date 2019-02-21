@@ -2,9 +2,23 @@
  * Created by jiachenpan on 16/11/18.
  */
 
-export function isvalidUsername(str) {
-  const valid_map = ['admin', 'editor']
-  return valid_map.indexOf(str.trim()) >= 0
+//正则
+export const regexp = {
+  IsChineseName(s){
+    return /^[\u2E80-\u9FFF]{2,5}$/.test(s)
+  },
+  HasIllegalSign(s){
+    return /[\?!#$%\\^&\*\(\)\|\[\]]+/.test(s)
+  },
+  IsNumber(s){
+    return /^\d+$/.test(s)
+  },
+  isArray(s){
+    return Object.prototype.toString.call(s) === '[object Array]'
+  },
+  isObject(s){
+    return Object.prototype.toString.call(s) === '[object Object]'
+  },
 }
 
 /* 合法uri*/
