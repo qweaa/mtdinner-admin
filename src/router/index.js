@@ -96,7 +96,7 @@ export const constantRouterMap = [
     component: Layout,
     name: 'Store',
     meta: {
-      title: '店铺管理',
+      title: '店铺&菜单管理',
       icon: 'nested'
     },
     children: [
@@ -104,13 +104,19 @@ export const constantRouterMap = [
         path: 'list',
         component: () => import('@/views/store/list/index'), // Parent router-view
         name: 'StoreList',
-        meta: { title: '店铺列表' },
+        meta: { title: '店铺&菜单' },
       },
       {
         path: 'add',
         component: () => import('@/views/store/add/index'),
         name: 'StoreAdd',
         meta: { title: '添加店铺' }
+      },
+      {
+        path: 'addMenu',
+        component: () => import('@/views/menu/add/index'),
+        name: 'MenuAdd',
+        meta: { title: '添加菜单' }
       },
       {
         path: 'update',
@@ -127,6 +133,7 @@ export const constantRouterMap = [
     path: '/menu',
     component: Layout,
     name: 'Menu',
+    hidden: true,
     meta: {
       title: '菜单管理',
       icon: 'nested'
@@ -149,7 +156,7 @@ export const constantRouterMap = [
         component: () => import('@/views/menu/update/index'),
         name: 'MenuUpdate',
         meta: { title: '修改菜单' },
-        hidden: true
+        // hidden: true
       }
     ]
   },
@@ -164,10 +171,17 @@ export const constantRouterMap = [
     },
     children: [
       {
-        path: 'list',
-        component: () => import('@/views/book/list/index'), // Parent router-view
-        name: 'MenuList',
+        path: 'selectDate',
+        component: () => import('@/views/book/list/selectDate'), // Parent router-view
+        name: 'selectDate',
         meta: { title: '订单列表' },
+      },
+      {
+        path: 'list',
+        component: () => import('@/views/book/list/list'), // Parent router-view
+        name: 'BookList',
+        hidden: true,
+        meta: { title: '订单' },
       },
     ]
   },

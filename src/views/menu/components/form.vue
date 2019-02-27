@@ -15,6 +15,11 @@
             <el-form-item prop="Store_ID" label="店铺">
                 <select-store :storeid.sync="form.Store_ID"></select-store>
             </el-form-item>
+            <el-form-item prop="MenuType_ID" label="类型">
+                <el-select style="width: 100%;" v-model="form.MenuType_ID" placeholder="菜单类型">
+                    <el-option v-for="(item, index) in menutype" :key="index" :label="item.TypeName" :value="item.ID"></el-option>
+                </el-select>
+            </el-form-item>
             <el-form-item prop="MenuName" label="菜单名称">
                 <el-input v-model="form.MenuName"></el-input>
             </el-form-item>
@@ -60,6 +65,7 @@
 </template>
 <script>
 import selectStore from '@/components/SelectStore'
+import { getMenuTypeList } from '@/api/menutype'
 export default {
     components: {
         selectStore,
@@ -136,6 +142,7 @@ export default {
             year: new Date(),
             form: {
                 Store_ID: '',
+                MenuType_ID: '',
                 MenuName: '',
                 IsComment: 1,
                 Status: 1,
@@ -146,9 +153,11 @@ export default {
             },
             formRules: {
                 Store_ID: [{ required: true, trigger: 'blur', message: '请选择店铺' }],
+                MenuType_ID: [{ required: true, trigger: 'blur', message: '请选择菜单类型' }],
                 MenuName: [{ required: true, trigger: 'blur', message: '请填写菜单名称' }],
                 Price: [{ required: true, trigger: 'blur', message: '请填写菜单价格' }],
             },
+            menutype: [],
         }
     },
     methods: {
@@ -208,6 +217,11 @@ export default {
             this.form = Object.assign(this.form, this.formData)
             this.resetTime()
         }
+    },
+    created() {
+        getMenuTypeList().then(data=>{
+            this.menutype = data.data
+        })
     },
 }
 </script>

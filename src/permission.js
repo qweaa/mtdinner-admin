@@ -25,7 +25,17 @@ router.beforeEach((to, from, next) => {
           })
         })
       } else {
-        next()
+        if(!store.getters.rules){
+          store.dispatch('GetRules').then(res => { // 拉取规则
+            next()
+          }).catch((err) => {
+            store.dispatch('GetRules').then(res => { // 拉取规则
+              next()
+            }).catch((err) => {next()})
+          })
+        }else{
+          next()
+        }
       }
     }
   } else {

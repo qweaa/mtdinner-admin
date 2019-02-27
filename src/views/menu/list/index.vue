@@ -94,9 +94,13 @@ export default {
     },
   },
   created(){
-    GetRules().then(data=>{
-        this.getList(data.data.ActiveStoreID)
-    })
+    if(this.$route.query.storeid){
+        this.getList(this.$route.query.storeid)
+    }else{
+        GetRules().then(data=>{
+            this.getList(data.data.ActiveStoreID)
+        })
+    }
   }
 }
 </script>

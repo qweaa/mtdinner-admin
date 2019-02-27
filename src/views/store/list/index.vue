@@ -19,6 +19,7 @@
                     <el-button type="text" size="mini" @click="gotoUpdate(scope.row.ID)">编辑</el-button>
                     <el-button type="text" class="color-danger" v-if="scope.row.Status === 1" @click="forbidden(scope.$index)" size="mini">禁用</el-button>
                     <el-button type="text" class="color-success" v-else @click="legal(scope.$index)" size="mini">启用</el-button>
+                    <el-button type="text" size="mini" @click="gotoMenuList(scope.row.ID)">菜单</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -81,6 +82,9 @@ export default {
     //--------------------------------- 交互函数 --------------------------------------
     gotoUpdate(id){
       this.$router.push({path: '/store/update', query: {storeid: id}})
+    },
+    gotoMenuList(id){
+      this.$router.push({path: '/menu/list', query: {storeid: id}})
     },
   },
   created(){
